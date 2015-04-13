@@ -4,8 +4,9 @@ angular.module('mindera.factories', [])
     function ($q, $cookies) {
         return {
             request: function (config) {
-                config.headers['M-SSO'] = $cookies['M-SSO'];
-                config.headers['M-Product-Id'] = $cookies['M-Product-Id'];
+                for (var cookie in $cookies) {
+                    config.headers[cookie] = $cookies[cookie];
+                }
                 return config || $q.when(config);
             }
         };
